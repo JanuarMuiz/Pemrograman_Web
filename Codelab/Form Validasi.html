@@ -1,0 +1,114 @@
+<html>
+<head>
+    <style>
+        body {
+            background-color: #2f3c30;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            background-color: #76557a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .form-container h2 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .form-container label {
+            display: block;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container input[type="submit"] {
+            background-color: #252525;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .error {
+            color: rgb(255, 255, 255);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Form Pendaftaran</h2>
+        <form id="registrationForm">
+            <label for="name">Nama</label>
+            <input type="text" id="name" name="name">
+            <div id="nameError" class="error"></div>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+            <div id="emailError" class="error"></div>
+            
+            <label for="address">Alamat Lengkap</label>
+            <textarea id="address" name="address" rows="4"></textarea>
+            <div id="addressError" class="error"></div>
+            
+            <input type="submit" value="Daftar">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            let isValid = true;
+            
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('addressError').textContent = '';
+            
+            const name = document.getElementById('name').value;
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'Nama harus diisi';
+                isValid = false;
+            }
+            
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'Email harus diisi';
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'Email tidak valid';
+                isValid = false;
+            }
+            
+            const address = document.getElementById('address').value;
+            if (address === '') {
+                document.getElementById('addressError').textContent = 'Alamat harus diisi';
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                alert('Isi data yang lengkap bos!!!.');
+            } else {
+                alert('Form berhasil dikirim!');
+            }
+        });
+    </script>
+</body>
+</html>
